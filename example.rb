@@ -1,5 +1,11 @@
 #!/usr/bin/ruby
 
+#
+# SecSign ID Api example in ruby.
+#
+# (c) copyright SecSign Technologies Inc.
+#
+
 require_relative 'SecSignIDApi' 
 
 #

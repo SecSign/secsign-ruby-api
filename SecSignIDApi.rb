@@ -1,3 +1,5 @@
+# $Id: SecSignIDApi.rb,v 1.4 2014/04/24 16:26:28 titus Exp $
+
 
 #
 # SecSign ID Api in ruby.
@@ -5,7 +7,7 @@
 # (c) copyright SecSign Technologies Inc.
 #
 
-SCRIPT_REVISION = '$Revision: 1.3 $'
+SCRIPT_REVISION = '$Revision: 1.4 $'
 require 'uri'
 require 'net/http'
 
@@ -76,7 +78,7 @@ end # end of class AuthSession
 # Ruby class to connect to a secsign id server. the class will check secsign id server certificate and request for authentication session generation for a given
 # user id which is called secsign id. Each authentication session generation needs a new instance of this class.
 # 
-# $Id: SecSignIDApi.rb,v 1.3 2014/04/08 15:28:15 titus Exp $
+# $Id: SecSignIDApi.rb,v 1.4 2014/04/24 16:26:28 titus Exp $
 # SecSign Technologies Inc.
 
 class SecSignIDApi
@@ -293,50 +295,6 @@ class SecSignIDApi
 			request.set_form_data(parameter)
  			
  			return http.request(request) 
-
-=begin	        
-		# Gets a cURL resource handle.
-        # http://rubyforge.org/projects/curl-multi/
-        # http://curb.rubyforge.org/classes/Curl/Easy.html
-    	# https://github.com/taf2/curb
-    	
-    	def getCurlHandle()
-    	
-            # create cURL resource
-            $ch = curl_init();
-            
-            # set url
-            curl_setopt($ch, CURLOPT_URL, $server);
-            #curl_setopt($ch, CURLOPT_PROTOCOLS, CURLPROTO_HTTPS);
-            curl_setopt($ch, CURLOPT_PORT, $port);
-            #curl_setopt($ch, CURLOPT_SSLVERSION, 3);
-            
-            #return the transfer as a string
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_HEADER, 0); # value 0 will strip header information in response 
-            
-            # set connection timeout
-            curl_setopt($ch, CURLOPT_TIMEOUT, $timeout_in_seconds);
-            curl_setopt($ch, CURLOPT_FRESH_CONNECT, 1);
-            
-            # make sure the common name of the certificate's subject matches the server's host name
-            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-            
-            # validate the certificate chain of the server
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
-            
-            #The CA certificates
-            curl_setopt($ch, CURLOPT_CAINFO, realpath(dirname(__FILE__)) .'/curl-ca-bundle.crt');
-            
-            # add referer
-            curl_setopt($ch, CURLOPT_REFERER, $this->referer); 
-            
-            # add all parameter and change request mode to POST
-            curl_setopt($ch, CURLOPT_POST, 2);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $parameter);
-            
-            return $ch;
-=end
         end
         
         private :log

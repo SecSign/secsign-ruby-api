@@ -1,4 +1,4 @@
-# $Id: SecSignIDApi.rb,v 1.5 2014/05/28 15:10:23 titus Exp $
+# $Id: SecSignIDApi.rb,v 1.6 2015/01/06 17:19:56 titus Exp $
 
 
 #
@@ -7,7 +7,7 @@
 # (c) 2014 SecSign Technologies Inc.
 #
 
-SCRIPT_REVISION = '$Revision: 1.5 $'
+SCRIPT_REVISION = '$Revision: 1.6 $'
 require 'uri'
 require 'net/http'
 
@@ -78,7 +78,7 @@ end # end of class AuthSession
 # Ruby class to connect to a secsign id server. the class will check secsign id server certificate and request for authentication session generation for a given
 # user id which is called secsign id. Each authentication session generation needs a new instance of this class.
 # 
-# $Id: SecSignIDApi.rb,v 1.5 2014/05/28 15:10:23 titus Exp $
+# $Id: SecSignIDApi.rb,v 1.6 2015/01/06 17:19:56 titus Exp $
 # SecSign Technologies Inc.
 
 class SecSignIDApi
@@ -99,7 +99,8 @@ class SecSignIDApi
             lastSpace = SCRIPT_REVISION.index(" ", firstSpace)
             
             @scriptVersion = SCRIPT_REVISION[firstSpace, lastSpace-firstSpace]
-            @referer = self.class.name.split('::').last + "_Ruby"
+            #@referer = self.class.name.split('::').last + "_Ruby"
+            @referer = "SecSignIDApi_Ruby"
         end
         
 

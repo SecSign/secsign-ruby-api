@@ -1,13 +1,13 @@
-# $Id: SecSignIDApi.rb,v 1.6 2015/01/06 17:19:56 titus Exp $
+# $Id: SecSignIDApi.rb,v 1.7 2015/04/10 15:42:07 titus Exp $
 
 
 #
 # SecSign ID Api in ruby.
 #
-# (c) 2014 SecSign Technologies Inc.
+# (c) 2014, 2015 SecSign Technologies Inc.
 #
 
-SCRIPT_REVISION = '$Revision: 1.6 $'
+SCRIPT_REVISION = '$Revision: 1.7 $'
 require 'uri'
 require 'net/http'
 
@@ -78,7 +78,7 @@ end # end of class AuthSession
 # Ruby class to connect to a secsign id server. the class will check secsign id server certificate and request for authentication session generation for a given
 # user id which is called secsign id. Each authentication session generation needs a new instance of this class.
 # 
-# $Id: SecSignIDApi.rb,v 1.6 2015/01/06 17:19:56 titus Exp $
+# $Id: SecSignIDApi.rb,v 1.7 2015/04/10 15:42:07 titus Exp $
 # SecSign Technologies Inc.
 
 class SecSignIDApi

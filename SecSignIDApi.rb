@@ -7,9 +7,11 @@
 # (c) 2014, 2015 SecSign Technologies Inc.
 #
 
-SCRIPT_REVISION = '$Revision: 1.7 $'
+
 require 'uri'
 require 'net/http'
+
+SCRIPT_VERSION = '1.9'
 
 module SecSign
 	class AuthSession
@@ -93,13 +95,7 @@ class SecSignIDApi
             @secSignIDServerPort = 443
             @secSignIDServer_fallback = "https://httpapi2.secsign.com"
             @secSignIDServerPort_fallback = 443
-            
-            # script version from cvs revision string
-            firstSpace = SCRIPT_REVISION.index(" ")
-            lastSpace = SCRIPT_REVISION.index(" ", firstSpace)
-            
-            @scriptVersion = SCRIPT_REVISION[firstSpace, lastSpace-firstSpace]
-            #@referer = self.class.name.split('::').last + "_Ruby"
+            @scriptVersion = SCRIPT_VERSION
             @referer = "SecSignIDApi_Ruby"
         end
         
@@ -129,21 +125,30 @@ class SecSignIDApi
         def requestAuthSession(secsignid, servicename, serviceadress)
             log("Call of function 'requestAuthSession'.")
             
-            if servicename.nil?
-                log("Parameter servicename must not be nil.")
-                raise ArgumentError.new "Parameter servicename must not be nil."
+            if servicename.nil? || servicename.empty?
+                log("Parameter servicename must not be nil or empty.")
+                raise ArgumentError.new "Parameter servicename must not be nil or empty."
             end
             
-            if serviceadress.nil?
-                log("Parameter serviceadress must not be nil.")
-                raise ArgumentError.new "Parameter serviceadress must not be nil."
+            if serviceadress.nil? || serviceadress.empty?
+                log("Parameter serviceadress must not be nil or empty.")
+                raise ArgumentError.new "Parameter serviceadress must not be nil or empty."
             end
             
-            if secsignid.nil? 
-                log("Parameter secsignid must not be nil.")
-                raise ArgumentError.new "Parameter secsignid must not be nil."
+            if secsignid.nil?  || secsignid.empty?
+                log("Parameter secsignid must not be nil or empty.")
+                raise ArgumentError.new "Parameter secsignid must not be nil or empty."
             end
-
+            
+            # convert string to downcase and strip/trim whitespace
+            secsignid = secsignid.downcase.strip!
+            
+			# check again whether secsign id empty
+			if secsignid.empty?
+                log("Parameter secsignid must not be empty.")
+                raise ArgumentError.new "Parameter secsignid must not be empty."
+            end
+            
             requestParameter = {"request" => 'ReqRequestAuthSession',
                 "secsignid" => secsignid,
                 "servicename" => servicename,
@@ -219,9 +224,9 @@ class SecSignIDApi
             mandatoryParams = {'apimethod' => @referer}
             if(! authSession.nil?)
                 # add auth session data to mandatory parameter array
-                authSessionData = {'secsignid' => authSession.secSignID,
-                                         'authsessionid'  => authSession.authSessionID,
-                                         'requestid' => authSession.requestID}
+                authSessionData = {'secsignid' => authSession.secSignID.downcase ,
+                            	   'authsessionid'  => authSession.authSessionID,
+                                   'requestid' => authSession.requestID}
                 
                 mandatoryParams.merge!(authSessionData)
             end

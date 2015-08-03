@@ -19,7 +19,7 @@ This Ruby API allows a secure login using a private key on a smart phone running
 
 Check out the included example `example.rb` to see how it works or 
 have a look at the how to use tutorial for PHP <https://www.secsign.com/php-tutorial/>. The process is exactly the same in ruby.
-Or visit <https://www.secsign.com> for more informations.
+Or visit <https://www.secsign.com> for more information.
 
 **Files**
 
